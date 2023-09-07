@@ -13,6 +13,9 @@ void setup() {
                  90, 
                  DEFAULT_MICROSECONDS_FOR_0_DEGREE,
                  DEFAULT_MICROSECONDS_FOR_180_DEGREE);
+
+  g_servo.setMinMaxConstraint(60, 120);
+
   g_isMoving = false;
   g_pre_isMoving = g_servo.isMoving();
 }
@@ -28,8 +31,6 @@ void loop() {
     else {
       target = 180;
     }
-    // 0 ~ 180の範囲で動かそうとするが、MinMaxConstraintを設定してるので、
-    // その範囲でしか動かない。途中で停止する。
     Serial.printf("MOVE %d\n", target);
     g_servo.startEaseTo(target, 45);
     g_isMoving = true;
